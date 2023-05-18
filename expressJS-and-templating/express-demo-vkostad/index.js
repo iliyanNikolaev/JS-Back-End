@@ -1,37 +1,21 @@
 const express = require('express');
-const catalogRouter = require('./catalogController');
-const createRouter = require('./createController');
+const hbr = require('express-handlebars');
 const app = express();
+const homeController = require('./controllers/homeController');
+const catalogController = require('./controllers/catalogController');
+const createController = require('./controllers/createController');
 
-
-app.use('/catalog', catalogRouter);
-app.use('/create', createRouter);
-
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+const handlebars = hbr.create({
+    extname: '.hbs'
 });
 
-app.get('/img', (req, res) => {
-    res.sendFile(__dirname + '/Capture.PNG');
-});
-
-
-app.get('/data', (req, res) => {
-    res.json([
-        {
-            name: 'Ilich',
-            age: 25
-        },
-        {
-            name: 'Boyana',
-            age: 21
-        }
-    ])
-});
-
-app.all('*', (req, res) => {
-    res.status(404).send('<h1>Not Found 404</h1>')
-});
+app.engine('.hbs', handlebars.engine);
+app.set('view engine', '.hbs');
+app.use(express.urlencoded( {extended: false }));
+app.use(express.static('static'));
+app.use(homeController);
+app.use('/catalog', catalogController);
+app.use('/create', createController);
 
 app.listen(6161);
 
