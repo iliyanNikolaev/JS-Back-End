@@ -1,0 +1,18 @@
+[
+    {
+        "id": "1212",
+        "name": "Apartment",
+        "description": "some description",
+        "city": "Pleven",
+        "beds": 1,
+        "price": 220
+    },
+    {
+        "id": "1213",
+        "name": "House",
+        "description": "some description",
+        "city": "Trastenik",
+        "beds": 4,
+        "price": 120
+    }
+]

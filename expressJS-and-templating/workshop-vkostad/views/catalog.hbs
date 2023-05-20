@@ -1,2 +1,11 @@
 <h1>Catalog</h1>
-<p>TODO... some list with items</p>
+{{#if rooms}}
+<div class="items-list">
+
+    {{#each rooms}}
+    {{>roomCard}}
+    {{/each}}
+</div>
+{{else}}
+<p>Not exist rooms yet</p>
+{{/if}}

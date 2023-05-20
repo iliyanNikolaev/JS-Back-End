@@ -1,3 +1,28 @@
 body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     background-color: antiquewhite;
+}
+
+label{
+    display: block;
+    margin: 4px;
+}
+
+.foot{
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+}
+
+.items-list{
+    display: flex;
+    
+}
+
+.item-card{
+    margin: 5px;
+    width: 200px;
 }
