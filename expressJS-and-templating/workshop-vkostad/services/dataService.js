@@ -6,7 +6,7 @@ const data = JSON.parse(fs.readFileSync(fileName));
 
 async function persist(){
     return new Promise((res, rej) => {
-        fs.writeFile(fileName, JSON.stringify(data), (err) => {
+        fs.writeFile(fileName, JSON.stringify(data, null, 2), (err) => {
             if(err == null){
                 res();
             } else {
@@ -21,8 +21,8 @@ async function persist(){
 //ако данните не са записани успешно във файла. Затова е проверката ако error == null, тогава resolve-ваме промиса, а в противен случай го reject-ваме
 //като подаваме грешката 
 
-function getAll(){
-    return data;
+function getAll(search){
+    return data.filter(x => x.name.toLowerCase().includes(search.toLowerCase()));
 }
 
 function getById(id){
