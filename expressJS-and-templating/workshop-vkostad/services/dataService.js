@@ -31,5 +31,7 @@ function getById(id){
 
 module.exports = {
     getAll,
-    getById
+    getById,
+    persist, 
+    data
 }
