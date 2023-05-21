@@ -1,5 +1,12 @@
 <h1>Create item</h1>
 <form action="/create" method="post">
+        {{#if error}}
+        <div>
+                {{#each error}}
+                <strong><p style="color: red">{{this}}</p></strong>
+                {{/each}}
+        </div>
+        {{/if}}
         <label><strong>Name: </strong><input type="text" name="name"></label>
         <label><strong>City: </strong><input type="text" name="city"></label>
         <label><strong>Description: </strong><input type="text" name="description"></label>

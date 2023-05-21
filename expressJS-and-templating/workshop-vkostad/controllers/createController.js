@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {data, persist} = require('../services/dataService');
+const { create } = require('../services/dataService');
 
 router.get('/', (req, res) => {
     res.render('create', {
@@ -9,14 +9,15 @@ router.get('/', (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const itemData = req.body;
-        const id = Math.ceil(Math.random() * 9999);
-        itemData.id = id;
-        data.push(itemData);
-        await persist();
-        res.redirect('/catalog');
+        const room = await create(req.body);
+
+        res.redirect(`/catalog/${room.id}`);
     } catch (err) {
-        console.log(err.message)
+        console.log(err)
+        res.render('create', {
+            title: 'Error',
+            error: err.message.split('\n')
+        })
     }
 });
 
