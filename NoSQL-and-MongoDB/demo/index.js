@@ -11,18 +11,16 @@ async function start() {
 
     console.log('database connected');
 
-    const person = new Person({
-        firstName: 'Ilich',
-        lastName: 'Ilicha',
-        age: 21
-    });
+    const person = await Person.findById('646ba48e3ff65457bc254559');
+    //const data = await Person.find({ firstName: 'Ilich'});
+
+    //find returns array, findOne returns only first matched element
+
+    person.age = 25;
+
+    await person.save();
     
-    await person.save(); 
-
-    const data = await Person.find({});
-
-    console.log(data[0].sayHi());
-    console.log(data[0].name);
+    console.log(person);
 
     await mongoose.disconnect(); 
 }
