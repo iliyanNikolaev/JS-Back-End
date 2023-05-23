@@ -1,21 +1,18 @@
-const { getAll, getById } = require('../services/dataService');
+const { getAll, getById } = require('../services/databaseService');
 
 const router = require('express').Router();
 
-router.get('/', (req, res) => {
-    const search = req.query.search || '';
-    const rooms = getAll(search);
-
+router.get('/', async (req, res) => {
+    const rooms = await getAll();
     res.render('catalog', {
         title: 'Catalog',
-        rooms,
-        search
+        rooms
     });
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
     const id = req.params.id;
-    const item = getById(id);
+    const item = await getById(id);
     if(item){
         res.render('details', {
             title: 'Details',

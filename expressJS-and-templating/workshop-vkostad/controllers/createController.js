@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { create } = require('../services/dataService');
+const { create } = require('../services/databaseService');
 
 router.get('/', (req, res) => {
     res.render('create', {
@@ -11,7 +11,7 @@ router.post('/', async (req, res) => {
     try {
         const room = await create(req.body);
 
-        res.redirect(`/catalog/${room.id}`);
+        res.redirect(`/catalog/${room._id}`);
     } catch (err) {
         console.log(err)
         res.render('create', {

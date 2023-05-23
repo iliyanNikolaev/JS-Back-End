@@ -5,10 +5,11 @@ const databaseConfig = require('./config/database');
 
 async function start(){
     const app = express();
+    
+    await databaseConfig(app);
 
     expressConfig(app);
     routesConfig(app);
-    databaseConfig(app);
 
     app.listen(6161, () => console.log('Server is listenning on port 6161...'));
 }
