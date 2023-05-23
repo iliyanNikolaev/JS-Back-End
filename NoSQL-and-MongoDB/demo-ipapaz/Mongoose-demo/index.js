@@ -1,27 +1,5 @@
 const mongoose = require('mongoose');
-
-//creating Schema and model
-const catSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    age: Number,
-    breed: String
-});
-
-//Method
-catSchema.methods.sayHi = function(){
-    console.log(`${this.name} says meooow...`);
-}
-
-//Virtual property
-catSchema.virtual('info').get(function(){
-    return `Cat info: -name: ${this.name} -breed: ${this.breed}`; 
-})
-
-const Cat = mongoose.model('Cat', catSchema);
-
+const Cat = require('./models/Cat');
 
 async function main(){
     mongoose.set('strictQuery', false); 
@@ -29,11 +7,13 @@ async function main(){
 
     console.log('database connected!');
     try {
-        const cats = await readCats();
-        cats.forEach(x => {
-            x.sayHi();
-            console.log(x.info);
-        });
+        /* 
+        const cat = await readCat('Siso');
+        console.log(cat); */
+
+        await deleteCat('646ced1957923d783598ff2b');
+        console.log('Deleted!');
+
     } catch (error) {
         console.log(error.message);
     }
@@ -64,4 +44,20 @@ async function readCats(){
     const cats = await Cat.find();
 
     return cats;
+}
+
+async function readCat(name){
+    const cat = await Cat.findOne({name});
+    //const cat = await Cat.findById('646ca499161d22a474b7be7a');
+
+    return cat;
+}
+
+async function updateCat(id, newName){
+    //await Cat.updateOne({ name }, { name: newName });
+    await Cat.findByIdAndUpdate(id, {name: newName});
+}
+
+async function deleteCat(id){
+    await Cat.findByIdAndDelete(id);
 }
