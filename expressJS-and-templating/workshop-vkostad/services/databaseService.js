@@ -1,4 +1,4 @@
-const Data = require('../models/Data');
+const Data = require('../models/Item');
 
 function getAll(){
     return Data.find({}).lean();

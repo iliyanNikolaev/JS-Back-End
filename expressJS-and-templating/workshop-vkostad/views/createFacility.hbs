@@ -1,0 +1,13 @@
+<h1>Create Facility</h1>
+<form action="/facility/create" method="post">
+        {{#if error}}
+        <div>
+                {{#each error}}
+                <strong><p style="color: red">{{this}}</p></strong>
+                {{/each}}
+        </div>
+        {{/if}}
+        <label><strong>Label: </strong><input type="text" name="label"></label>
+        <label><strong>Icon URL: </strong><input type="text" name="iconUrl"></label>
+        <input type="submit" value="Create">
+</form>
