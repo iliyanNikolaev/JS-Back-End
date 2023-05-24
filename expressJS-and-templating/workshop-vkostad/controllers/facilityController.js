@@ -22,7 +22,7 @@ facilityController.post('/create', async (req, res) => {
     } catch (err) {
         res.render('createFacility', {
             title: 'Create new facility',
-            error: err.message
+            error: [err.message]
         });
     }
 });
