@@ -6,7 +6,7 @@ const itemSchema = new mongoose.Schema({
     city: { type: String, required: true},
     beds: { type: Number, required: true, min: 1},
     price: { type: Number, required: true, min: 1 },
-    facilities: {type: [mongoose.Types.ObjectId], default: [], ref: 'Facility'}
+    facilities: {type: [mongoose.Types.Object], default: [], ref: 'Facility'}
 });
 
 const Item = mongoose.model('Item', itemSchema);

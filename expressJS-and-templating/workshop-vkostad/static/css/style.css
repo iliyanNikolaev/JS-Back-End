@@ -26,3 +26,12 @@ label{
     margin: 5px;
     width: 200px;
 }
+
+img{
+    width: 18px;
+    height: 18px;
+}
+
+label.icon{
+    display: inline-block;
+}

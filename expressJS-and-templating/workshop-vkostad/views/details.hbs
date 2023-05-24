@@ -5,4 +5,15 @@
 <p><strong>Description:</strong> {{description}}</p>
 <p><strong>Price per month:</strong> {{price}} BGN</p>
 <p><strong>Beds:</strong> {{beds}}</p>
+    <h2>Facilities</h2>
+{{#if facilities}}
+    <ul>
+    {{#each facilities}}
+        <li><label class="icon">{{label}}</label> <img src="{{iconUrl}}"></li>
+    {{/each}}
+    </ul>
+    {{else}}
+    <p>Not exist facilities yet</p>
+{{/if}}
+<a href="/facility/{{_id}}/addToItem">Add Facility</a>
 {{/with}}

@@ -1,0 +1,11 @@
+<h1>Add facility</h1>
+<h2>Item name: {{item.name}}</h2>
+<h3>Facilities</h3>
+<form action="/facility/{{item._id}}/addToItem" method="post">
+<ul>
+    {{#each facilities}}
+        <li><input type="checkbox" name="{{_id}}"><label class="icon">{{label}}</label> <img src="{{iconUrl}}"></li>
+    {{/each}}
+</ul>
+<input type="submit" value="Add">
+</form>
