@@ -1,0 +1,16 @@
+{
+    "users": [
+        {
+            "username": "test",
+            "password": "$2b$10$yf78gbKMGrKXee75wsnO9uATt4JYVpivkDQmBjUmm.ywoX/7MtfFe"
+        },
+        {
+            "username": "ilicha",
+            "password": "$2b$10$7zXjVdtpf9DiYxTUqI.0R.KBLWWHWdEqmULYnaZzdZkR7/B4.26Gy"
+        },
+        {
+            "username": "boyana",
+            "password": "$2b$10$PASkdeyEpohRfK2O8jnZf.I1ZpNcj0EmpPrkMOngTziVtrjYHh0CS"
+        }
+    ]
+}
