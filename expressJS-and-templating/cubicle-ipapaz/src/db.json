@@ -1,1 +1,39 @@
-[{"name":{"name":"1","description":"1","imageUrl":"1","difficultyLevel":"1"}}]
+{
+    "cubes": [
+        {   
+            "id": 1,
+            "name": "GAN356 AIR SM",
+            "description": "test",
+            "imageUrl": "https://rubik.bg/3008-thickbox_default/kub-za-skorostno-narezhdane-gancube-gan356-air-sm-3x3x3-56mm-magnetic-cheren-2019-edition.jpg",
+            "difficultyLevel": "3"
+        },
+        {   
+            "id": 2,
+            "name": "ECO-DARK",
+            "description": "test",
+            "imageUrl": "https://thingsidesire.com/wp-content/uploads/2018/06/Eco-Dark-Rubik%E2%80%99s-Cube2.jpg",
+            "difficultyLevel": "6"
+        },
+        {
+            "id": 3,
+            "name": "PYRAMINX",
+            "description": "test",
+            "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/61izOzq%2BBAL._SY355_.jpg",
+            "difficultyLevel": "1"
+        },
+        {
+            "id": 4,
+            "name": "MEGAMINX",
+            "description": "test",
+            "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/61HpQqVQ37L._SY355_.jpg",
+            "difficultyLevel": "3"
+        },
+        {
+            "id": 5,
+            "name": "RUBIK CUBE",
+            "description": "This is default rubik cube",
+            "imageUrl": "https://cdn.shopify.com/s/files/1/2598/1878/products/spin-master-rubiks-3-x-3-cube-6063964-2_1200x.jpg?v=1668928534",
+            "difficultyLevel": "1"
+        }
+    ]
+}

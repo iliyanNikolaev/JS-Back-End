@@ -5,7 +5,7 @@ createController.get('/', (req, res) => {
 });
 
 createController.post('/', (req, res) => {
-    const cube = new Cube(req.body);
+    const cube = new Cube(...Object.values(req.body));
 
     Cube.save(cube);
 
