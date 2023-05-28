@@ -1,10 +1,9 @@
 const express = require('express');
+const setupViewEngine = require('./config/viewEngine');
+const setupRoutes = require('./config/routes');
+const initDataBase = require('./config/databaseInit');
 
 const app = express();
-
-const setupViewEngine = require('../config/viewEngine');
-const setupRoutes = require('../config/routes');
-
 
 setupViewEngine(app);
 
@@ -13,7 +12,8 @@ app.use(express.urlencoded({ extended: true }));
 
 setupRoutes(app);
 
-
-app.listen(6161, () => console.log('Server is listening on port 6161...')); 
+initDataBase()
+    .then(() => app.listen(6161, () => console.log('Server is listening on port 6161...')))
+    .catch((err) => console.log(err.message));
 
 

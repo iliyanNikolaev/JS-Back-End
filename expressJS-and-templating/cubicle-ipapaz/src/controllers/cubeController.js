@@ -1,5 +1,4 @@
 const cubeController = require('express').Router();
-const db = require('../db.json');
 
 const Cube = require('../models/Cube');
 cubeController.get('/create', (req, res) => {
