@@ -1,14 +1,15 @@
 const cubeController = require('express').Router();
 
 const Cube = require('../models/Cube');
+
 cubeController.get('/create', (req, res) => {
     res.render('create');
 });
 
-cubeController.post('/create', (req, res) => {
-    const cube = new Cube(...Object.values(req.body));
+cubeController.post('/create', async (req, res) => {
+    const cube = new Cube(req.body);
 
-    Cube.save(cube);
+    await cube.save();
 
     res.redirect('/');
 });
