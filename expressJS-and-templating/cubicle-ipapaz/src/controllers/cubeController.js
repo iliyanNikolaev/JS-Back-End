@@ -14,19 +14,20 @@ cubeController.post('/create', async (req, res) => {
     res.redirect('/');
 });
 
-cubeController.get('/details/:cubeId', (req, res) => {
-    const cubeId = Number(req.params.cubeId);
+cubeController.get('/details/:cubeId', async (req, res) => {
+    const cubeId = req.params.cubeId;
 
     if(!cubeId){
         return res.redirect('/404');
     }
 
-    const cube = db.cubes.find(x => x.id == cubeId);
+    const cube = await Cube.findById(cubeId).lean();
     
     if(!cube){
         return res.redirect('/404');
     }
 
+    
     res.render('details', { cube });
 });
 

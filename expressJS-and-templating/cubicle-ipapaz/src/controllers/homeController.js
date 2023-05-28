@@ -1,10 +1,10 @@
 const homeController = require('express').Router();
-const db = require('../db.json');
+const Cube = require('../models/Cube');
 
-homeController.get('/', (req, res) => {
+homeController.get('/', async (req, res) => {
     const {search, from, to} = req.query;
     
-    let cubes = db.cubes;
+    let cubes = await Cube.find({}).lean();
 
     if (search) {
         cubes = cubes.filter(cube => cube.name.toLowerCase().includes(search.toLowerCase()));
