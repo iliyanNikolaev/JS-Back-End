@@ -1,9 +1,9 @@
 const homeController = require('../src/controllers/homeController');
-const createController = require('../src/controllers/createController');
+const cubeController = require('../src/controllers/cubeController');
 
 function setupRoutes(app) {
-    app.use('/', homeController);
-    app.use('/create', createController);
+    app.use(homeController);
+    app.use(cubeController);
 }
 
 module.exports = setupRoutes;
