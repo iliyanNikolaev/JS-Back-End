@@ -3,6 +3,8 @@ const { getAll, getById } = require('../services/databaseService');
 const router = require('express').Router();
 
 router.get('/', async (req, res) => {
+    const user = req.user;
+    console.log(user)
     const rooms = await getAll();
     res.render('catalog', {
         title: 'Catalog',
