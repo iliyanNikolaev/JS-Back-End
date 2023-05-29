@@ -22,7 +22,7 @@ cubeController.get('/details/:cubeId', async (req, res) => {
         return res.redirect('/404');
     }
 
-    const cube = await Cube.findById(cubeId).lean();
+    const cube = await Cube.findById(cubeId).populate('accessories').lean();
     
     if(!cube){
         return res.redirect('/404');
@@ -54,7 +54,7 @@ cubeController.post('/atach/:cubeId', async (req, res) => {
     cube.accessories.push(accessoryId);
     
     cube.save();
-    
+
     res.redirect(`/details/${req.params.cubeId}`);
 });
 

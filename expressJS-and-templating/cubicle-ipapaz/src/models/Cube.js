@@ -23,7 +23,7 @@ const cubeSchema = new mongoose.Schema({
     accessories: [
         {
             type: mongoose.Types.ObjectId,
-            ref: 'Accesory' // името на модела към който сочи референцията
+            ref: 'Accessory' // името на модела към който сочи референцията
         }
     ]   
 });
