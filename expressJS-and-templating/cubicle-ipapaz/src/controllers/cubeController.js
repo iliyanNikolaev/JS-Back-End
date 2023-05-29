@@ -18,18 +18,24 @@ cubeController.post('/create', async (req, res) => {
 cubeController.get('/details/:cubeId', async (req, res) => {
     const cubeId = req.params.cubeId;
 
-    if(!cubeId){
+    if (!cubeId) {
         return res.redirect('/404');
     }
 
-    const cube = await Cube.findById(cubeId).populate('accessories').lean();
-    
-    if(!cube){
-        return res.redirect('/404');
+    try {
+        const cube = await Cube.findById(cubeId).populate('accessories').lean();
+
+        if (!cube) {
+            return res.redirect('/404');
+        }
+
+
+        res.render('details', { cube });
+    } catch (err) {
+        console.log(err.message);
+        res.redirect('/404');
     }
 
-    
-    res.render('details', { cube });
 });
 
 cubeController.get('/atach/:cubeId', async (req, res) => {
@@ -38,7 +44,7 @@ cubeController.get('/atach/:cubeId', async (req, res) => {
     try {
         const cube = await Cube.findById(cubeId).lean();
         const accessories = await Accessory.find({}).lean();
-        
+
         res.render('atachAccessory', { cube, accessories });
 
     } catch (err) {
@@ -48,14 +54,20 @@ cubeController.get('/atach/:cubeId', async (req, res) => {
 });
 
 cubeController.post('/atach/:cubeId', async (req, res) => {
-    const cube = await Cube.findById(req.params.cubeId);
-    const accessoryId = req.body.accessory;
-    
-    cube.accessories.push(accessoryId);
-    
-    cube.save();
+    try {
+        const cube = await Cube.findById(req.params.cubeId);
+        const accessoryId = req.body.accessory;
 
-    res.redirect(`/details/${req.params.cubeId}`);
+        cube.accessories.push(accessoryId);
+
+        cube.save();
+
+        res.redirect(`/details/${req.params.cubeId}`);
+    } catch (err) {
+        console.log(err.message);
+        res.redirect('/404');
+    }
+
 });
 
 module.exports = cubeController;
