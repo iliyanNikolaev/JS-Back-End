@@ -21,7 +21,7 @@ cubeController.get('/details/:cubeId', async (req, res) => {
         return res.redirect('/404');
     }
 
-    const cube = await Cube.findById(cubeId).lean();
+    const cube = await Cube.findById(cubeId ).lean();
     
     if(!cube){
         return res.redirect('/404');
