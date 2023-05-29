@@ -19,7 +19,13 @@ const cubeSchema = new mongoose.Schema({
         required: true,
         max: 6,
         min: 1
-    }   
+    },
+    accessories: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'Accesory' // името на модела към който сочи референцията
+        }
+    ]   
 });
 
 const Cube = mongoose.model('Cube', cubeSchema);
