@@ -43,8 +43,8 @@ cubeController.get('/atach/:cubeId', async (req, res) => {
 
     try {
         const cube = await Cube.findById(cubeId).lean();
-        const accessories = await Accessory.find({}).lean();
-
+        const accessories = await Accessory.find({_id: { $nin: cube.accessories }}).lean(); 
+        // ще върне всички аксесоари от базата на които ид-то им не се намира в масива с аксесоари на конкретния елемент
         res.render('atachAccessory', { cube, accessories });
 
     } catch (err) {
