@@ -3,6 +3,7 @@ const cubeController = require('express').Router();
 const Cube = require('../models/Cube');
 const Accessory = require('../models/Accessory');
 const { isAuthenticated } = require('../middlewares/authMiddleware');
+const { getCubeById } = require('../services/cubeService');
 
 cubeController.get('/create', isAuthenticated, (req, res) => {
     res.render('create');
@@ -57,6 +58,7 @@ cubeController.get('/atach/:cubeId', isAuthenticated, async (req, res) => {
 cubeController.post('/atach/:cubeId', isAuthenticated, async (req, res) => {
     try {
         const cube = await Cube.findById(req.params.cubeId);
+        
         const accessoryId = req.body.accessory;
 
         cube.accessories.push(accessoryId);
@@ -70,5 +72,20 @@ cubeController.post('/atach/:cubeId', isAuthenticated, async (req, res) => {
     }
 
 });
+
+cubeController.get('/edit/:cubeId', isAuthenticated, async (req, res) => {
+    try {
+        const cube = await getCubeById(req.params.cubeId).lean();
+
+        res.render('edit', { cube });
+    } catch (err) {
+        console.log(err.message)
+        res.redirect('/404');
+    }
+})
+
+cubeController.post('edit/:cubeId', isAuthenticated, (req, res) => {
+
+})
 
 module.exports = cubeController;
