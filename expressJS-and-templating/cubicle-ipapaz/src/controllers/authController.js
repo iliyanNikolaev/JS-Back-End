@@ -28,9 +28,9 @@ authController.post('/login', async (req, res) => {
         
         const token = await jwt.sign(payload, secret, options);
 
+        res.cookie('auth', token);
         res.redirect('/');
 
-        return token;
     } catch (err) {
         console.log(err.message);
         res.redirect('/404');
