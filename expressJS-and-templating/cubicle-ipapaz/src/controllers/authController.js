@@ -1,6 +1,7 @@
 const { getUserByUsername, register } = require('../services/authService');
 
 const authController = require('express').Router();
+const jwt = require('../lib/jsonwebtoken');
 
 authController.get('/login', (req, res) => {
     res.render('login');
@@ -20,9 +21,16 @@ authController.post('/login', async (req, res) => {
         if(!isValid){
             throw new Error('Username or password dont match!');
         }
+
+        const payload = { username: user.username };
+        const secret = 'SomeSecretWord';
+        const options = {expiresIn: '2h'};
         
-        console.log(user);
+        const token = await jwt.sign(payload, secret, options);
+
         res.redirect('/');
+
+        return token;
     } catch (err) {
         console.log(err.message);
         res.redirect('/404');
