@@ -2,12 +2,13 @@ const cubeController = require('express').Router();
 
 const Cube = require('../models/Cube');
 const Accessory = require('../models/Accessory');
+const { isAuthenticated } = require('../middlewares/authMiddleware');
 
-cubeController.get('/create', (req, res) => {
+cubeController.get('/create', isAuthenticated, (req, res) => {
     res.render('create');
 });
 
-cubeController.post('/create', async (req, res) => {
+cubeController.post('/create', isAuthenticated, async (req, res) => {
     const cube = new Cube(req.body);
 
     await cube.save();
@@ -38,12 +39,12 @@ cubeController.get('/details/:cubeId', async (req, res) => {
 
 });
 
-cubeController.get('/atach/:cubeId', async (req, res) => {
+cubeController.get('/atach/:cubeId', isAuthenticated, async (req, res) => {
     const cubeId = req.params.cubeId;
 
     try {
         const cube = await Cube.findById(cubeId).lean();
-        const accessories = await Accessory.find({_id: { $nin: cube.accessories }}).lean(); 
+        const accessories = await Accessory.find({ _id: { $nin: cube.accessories } }).lean();
         // ще върне всички аксесоари от базата на които ид-то им не се намира в масива с аксесоари на конкретния елемент
         res.render('atachAccessory', { cube, accessories });
 
@@ -53,7 +54,7 @@ cubeController.get('/atach/:cubeId', async (req, res) => {
     }
 });
 
-cubeController.post('/atach/:cubeId', async (req, res) => {
+cubeController.post('/atach/:cubeId', isAuthenticated, async (req, res) => {
     try {
         const cube = await Cube.findById(req.params.cubeId);
         const accessoryId = req.body.accessory;

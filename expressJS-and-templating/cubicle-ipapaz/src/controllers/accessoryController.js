@@ -2,11 +2,13 @@ const Accessory = require('../models/Accessory');
 
 const accessoryController = require('express').Router();
 
-accessoryController.get('/create' , (req, res) => {
+const { isAuthenticated } = require('../middlewares/authMiddleware')
+
+accessoryController.get('/create' , isAuthenticated, (req, res) => {
     res.render('createAccessory');
 });
 
-accessoryController.post('/create' , async (req, res) => {
+accessoryController.post('/create' , isAuthenticated, async (req, res) => {
     const accessory = new Accessory(req.body);
 
     await accessory.save();
