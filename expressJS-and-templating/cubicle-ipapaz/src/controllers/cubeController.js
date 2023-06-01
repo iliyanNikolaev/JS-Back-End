@@ -4,6 +4,7 @@ const Cube = require('../models/Cube');
 const Accessory = require('../models/Accessory');
 const { isAuthenticated } = require('../middlewares/authMiddleware');
 const { getCubeById } = require('../services/cubeService');
+const generateDifficultyLevels = require('../util/difficultyLevels');
 
 cubeController.get('/create', isAuthenticated, (req, res) => {
     res.render('create');
@@ -76,8 +77,10 @@ cubeController.post('/atach/:cubeId', isAuthenticated, async (req, res) => {
 cubeController.get('/edit/:cubeId', isAuthenticated, async (req, res) => {
     try {
         const cube = await getCubeById(req.params.cubeId).lean();
+        
+        const difficultyLevels = generateDifficultyLevels(cube.difficultyLevel);
 
-        res.render('edit', { cube });
+        res.render('edit', { cube, difficultyLevels });
     } catch (err) {
         console.log(err.message)
         res.redirect('/404');
