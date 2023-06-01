@@ -7,7 +7,10 @@ async function authentication(req, res, next) {
         try {
             const decodedToken = await jwt.verify(token, 'SomeSecretWord');
             
-            req.user = decodedToken; // това го слагаме за да може следващия мидълуеър "isAuthenticated" да провери дали има нещо в req.user и да си върши работата
+            req.user = decodedToken; // това го слагаме за да може следващия мидълуеър "isAuthenticated" да провери 
+            //дали има нещо в req.user и да си върши работата, ползваме го и в някои routes като например
+            //пост заявката за създаване на куб, взимаме ид-то на съответния user от req.user за да можем да го сетнем, като owner 
+            // на куба който ще създава
             
             res.locals.username = decodedToken.username;  // това res.locals... е default свойство на експрес, пропътитата които сетнем тук ще бъдат налични в целия апп
             res.locals.isAuthenticated = true;            // в нашия случай го използваме в main layout-а на хендълбарс за да изрендим правилните бутони в навигацията

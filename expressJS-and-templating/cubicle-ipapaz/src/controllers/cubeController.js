@@ -11,7 +11,15 @@ cubeController.get('/create', isAuthenticated, (req, res) => {
 });
 
 cubeController.post('/create', isAuthenticated, async (req, res) => {
-    const cube = new Cube(req.body);
+    const { name, description, imageUrl, difficultyLevel } = req.body;
+
+    const cube = new Cube({
+        name,
+        description,
+        imageUrl,
+        difficultyLevel,
+        owner: req.user._id
+    });
 
     await cube.save();
 
@@ -31,9 +39,15 @@ cubeController.get('/details/:cubeId', async (req, res) => {
         if (!cube) {
             return res.redirect('/404');
         }
+        
+        let isOwner = false
 
+        if(req.user){
+            isOwner = cube.owner == req.user._id;
+        }
 
-        res.render('details', { cube });
+        res.render('details', { cube, isOwner });
+
     } catch (err) {
         console.log(err.message);
         res.redirect('/404');

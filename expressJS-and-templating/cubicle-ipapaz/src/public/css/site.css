@@ -281,3 +281,7 @@ footer {
         opacity: 0;
     }
 }
+
+span.congrats{
+    color: white;
+}
