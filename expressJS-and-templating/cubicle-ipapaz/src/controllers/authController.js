@@ -22,7 +22,7 @@ authController.post('/login', async (req, res) => {
             throw new Error('Username or password dont match!');
         }
 
-        const payload = { username: user.username };
+        const payload = { username: user.username }; // това което подадем тук, ще ни бъде върнато при verify-ване на токена
         const secret = 'SomeSecretWord';
         const options = {expiresIn: '2h'};
         
@@ -63,5 +63,10 @@ authController.post('/register', async (req, res) => {
         res.redirect('/404');
     }
 });
+
+authController.get('/logout', (req, res) => {
+    res.clearCookie('auth');
+    res.redirect('/');
+})
 
 module.exports = authController;

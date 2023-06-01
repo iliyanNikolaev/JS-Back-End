@@ -3,7 +3,7 @@ const cubeController = require('express').Router();
 const Cube = require('../models/Cube');
 const Accessory = require('../models/Accessory');
 const { isAuthenticated } = require('../middlewares/authMiddleware');
-const { getCubeById, editCube } = require('../services/cubeService');
+const { getCubeById, editCubeById, deleteCubeById } = require('../services/cubeService');
 const generateDifficultyLevels = require('../util/difficultyLevels');
 
 cubeController.get('/create', isAuthenticated, (req, res) => {
@@ -92,12 +92,30 @@ cubeController.post('/edit/:cubeId', isAuthenticated, async (req, res) => {
     const updatedCubeData = req.body;
 
     try {
-        await editCube(cubeId, updatedCubeData);   
+        await editCubeById(cubeId, updatedCubeData);   
         res.redirect(`/details/${cubeId}`)
     } catch (err) {
         console.log(err.message);
         res.redirect('/404');
     }
-})
+});
+
+cubeController.get('/delete/:cubeId', isAuthenticated, async (req, res) => {
+    
+    const cube = await getCubeById(req.params.cubeId).lean();
+    const difficultyLevels = generateDifficultyLevels(cube.difficultyLevel);
+
+    res.render('delete', { cube, difficultyLevels });
+});
+
+cubeController.post('/delete/:cubeId', isAuthenticated, async (req, res) => {
+    try {
+        await deleteCubeById(req.params.cubeId);
+        res.redirect('/');
+    } catch (err) {
+        console.log(err.message);
+        res.redirect('/404');
+    }
+});
 
 module.exports = cubeController;
