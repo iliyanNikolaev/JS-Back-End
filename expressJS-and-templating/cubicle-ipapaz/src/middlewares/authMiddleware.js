@@ -27,7 +27,7 @@ async function authentication(req, res, next) {
 function isAuthenticated(req, res, next) {  // този мидълуеър го подаваме само за страниците които са налични за логнати потребители
     const user = req.user;                  // като например създаване на куб, редакция на куб и т.н.
     if(!user){                              // функцията проверява дали потребителя, който се опитва да достъпи дадената страница е логнат
-        return res.redirect('/login');      // и ако не е го редиректва към логин
+        return res.render('login', {error: 'You are not logged! Please login!'});      // и ако не е го редиректва към логин
     }
 
     next();

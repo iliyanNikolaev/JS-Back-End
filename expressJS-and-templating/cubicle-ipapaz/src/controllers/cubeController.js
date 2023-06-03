@@ -3,6 +3,7 @@ const cubeController = require('express').Router();
 const Cube = require('../models/Cube');
 const Accessory = require('../models/Accessory');
 const { isAuthenticated } = require('../middlewares/authMiddleware');
+const isCubeOwner = require('../util/isCubeOwner');
 const { getCubeById, editCubeById, deleteCubeById } = require('../services/cubeService');
 const generateDifficultyLevels = require('../util/difficultyLevels');
 
@@ -30,14 +31,14 @@ cubeController.get('/details/:cubeId', async (req, res) => {
     const cubeId = req.params.cubeId;
 
     if (!cubeId) {
-        return res.redirect('/404');
+        return res.render('404', {error: 'This cube not exist!'});
     }
 
     try {
         const cube = await Cube.findById(cubeId).populate('accessories').lean();
 
         if (!cube) {
-            return res.redirect('/404');
+            return res.render('404', {error: 'This cube not exist!'});
         }
         
         let isOwner = false
@@ -61,6 +62,11 @@ cubeController.get('/atach/:cubeId', isAuthenticated, async (req, res) => {
     try {
         const cube = await Cube.findById(cubeId).lean();
         const accessories = await Accessory.find({ _id: { $nin: cube.accessories } }).lean();
+
+        if(cube.owner != req.user._id){
+            return res.render('404', {error: 'You are not owner to this cube'});
+        }
+
         // ще върне всички аксесоари от базата на които ид-то им не се намира в масива с аксесоари на конкретния елемент
         res.render('atachAccessory', { cube, accessories });
 
@@ -73,6 +79,10 @@ cubeController.get('/atach/:cubeId', isAuthenticated, async (req, res) => {
 cubeController.post('/atach/:cubeId', isAuthenticated, async (req, res) => {
     try {
         const cube = await Cube.findById(req.params.cubeId);
+
+        if(cube.owner != req.user._id){
+            return res.render('404', {error: 'You are not owner to this cube'});
+        }
         
         const accessoryId = req.body.accessory;
 
@@ -91,7 +101,11 @@ cubeController.post('/atach/:cubeId', isAuthenticated, async (req, res) => {
 cubeController.get('/edit/:cubeId', isAuthenticated, async (req, res) => {
     try {
         const cube = await getCubeById(req.params.cubeId).lean();
-        
+
+        if(cube.owner != req.user._id){
+            return res.render('404', {error: 'You are not owner to this cube'});
+        }
+
         const difficultyLevels = generateDifficultyLevels(cube.difficultyLevel);
 
         res.render('edit', { cube, difficultyLevels });
@@ -104,9 +118,15 @@ cubeController.get('/edit/:cubeId', isAuthenticated, async (req, res) => {
 cubeController.post('/edit/:cubeId', isAuthenticated, async (req, res) => {
     const cubeId = req.params.cubeId;
     const updatedCubeData = req.body;
+    
 
     try {
-        await editCubeById(cubeId, updatedCubeData);   
+        const cube = await editCubeById(cubeId, updatedCubeData);
+        
+        if(cube.owner != req.user._id){
+            return res.render('404', {error: 'You are not owner to this cube'});
+        }
+
         res.redirect(`/details/${cubeId}`)
     } catch (err) {
         console.log(err.message);
@@ -117,6 +137,11 @@ cubeController.post('/edit/:cubeId', isAuthenticated, async (req, res) => {
 cubeController.get('/delete/:cubeId', isAuthenticated, async (req, res) => {
     
     const cube = await getCubeById(req.params.cubeId).lean();
+
+    if(cube.owner != req.user._id){
+        return res.render('404', {error: 'You are not owner to this cube'});
+    }
+
     const difficultyLevels = generateDifficultyLevels(cube.difficultyLevel);
 
     res.render('delete', { cube, difficultyLevels });
@@ -124,7 +149,12 @@ cubeController.get('/delete/:cubeId', isAuthenticated, async (req, res) => {
 
 cubeController.post('/delete/:cubeId', isAuthenticated, async (req, res) => {
     try {
-        await deleteCubeById(req.params.cubeId);
+        const cube = await deleteCubeById(req.params.cubeId);
+
+        if(cube.owner != req.user._id){
+            return res.render('404', {error: 'You are not owner to this cube'});
+        }
+        
         res.redirect('/');
     } catch (err) {
         console.log(err.message);
