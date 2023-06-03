@@ -5,13 +5,17 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
-        minLength: 3
+        minLength: [5, 'Username is too short, must be minimum 5 symbols!'],
+        maxLength: [20, 'Username is too long, must be maximum 20 symbols!'],
+        unique: true,
+        validate: [/^[a-zA-Z0-9]+$/, 'Username must contains only english letters and diggits from 0 to 9!']
     }, 
     password: {
         type: String,
         required: true,
-        minLength: 6,
-        maxLength: 20
+        minLength: [6, 'Password is too short, must be minimum 6 symbols!'],
+        maxLength: [20, 'Password is too long, must be maximum 20 symbols!'],
+        validate: [/^[a-zA-Z0-9]+$/, 'Password must contains only english letters and diggits from 0 to 9!']
     }
 });
 

@@ -3,7 +3,6 @@ const cubeController = require('express').Router();
 const Cube = require('../models/Cube');
 const Accessory = require('../models/Accessory');
 const { isAuthenticated } = require('../middlewares/authMiddleware');
-const isCubeOwner = require('../util/isCubeOwner');
 const { getCubeById, editCubeById, deleteCubeById } = require('../services/cubeService');
 const generateDifficultyLevels = require('../util/difficultyLevels');
 
@@ -154,7 +153,7 @@ cubeController.post('/delete/:cubeId', isAuthenticated, async (req, res) => {
         if(cube.owner != req.user._id){
             return res.render('404', {error: 'You are not owner to this cube'});
         }
-        
+
         res.redirect('/');
     } catch (err) {
         console.log(err.message);

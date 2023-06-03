@@ -64,8 +64,9 @@ authController.post('/register', async (req, res, next) => {
 
         res.redirect('/login');
     } catch (err) {
-        console.log(err.message);
-        res.redirect('/404');
+        //console.log(err.errors) - // Грешките в mongoose идват под формата на обект, който има пропърти message, което е message-а който сме задали в mongooseSchema-та
+        const messages = Object.keys(err.errors).map(key => err.errors[key].message); // Взимаме key-овете на обекта, и ги мапваме в масив, в който слагаме само message-ите
+        res.render('register', { error: messages.join('\n') });
     }
 });
 
