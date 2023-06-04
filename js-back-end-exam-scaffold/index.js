@@ -3,6 +3,7 @@ const handlebars = require('express-handlebars');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const routes = require('./routes');
+const { authentication } = require('./middlewares/authenticationMiddleware');
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.set('view engine', 'hbs');
 app.use('/static', express.static('static'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(authentication);
 app.use(routes);
 
 //TODO: change database name

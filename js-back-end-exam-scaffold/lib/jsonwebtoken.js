@@ -1,18 +1,12 @@
-const jwt = require('jsonwebtoken');
+const jwtCallback = require('jsonwebtoken');
 const util = require('util');
 
-function sign() {
-    return util.promisify(jwt.sign);
-}
+const jwt = {
+    sign: util.promisify(jwtCallback.sign),
+    verify: util.promisify(jwtCallback.verify)
+};
 
-function verify() {
-    return util.promisify(jwt.verify);
-}
-
-module.exports = {
-    sign,
-    verify
-}
+module.exports = jwt;
 
 /* В конкретния случай се използва util.promisify() 
 за преобразуване на функциите jwt.sign и jwt.verify от пакета 

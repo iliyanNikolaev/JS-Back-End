@@ -32,3 +32,12 @@
     -- OPTIONAL: use util.promisify to use async syntax, look at the module-jsonwebtoken for better understanding
     -- generate token with payload
     -- add token to the cookie
+13. Add authentication middleware
+    -- use authentication middleware in index.js
+14. Logout
+15. Authorization middleware
+16. Dynamic navigation
+17. Error handling
+18. Add notification for errors to main layout
+19. Login automatically after registration
+20. Parse errors
