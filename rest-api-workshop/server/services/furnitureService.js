@@ -1,19 +1,29 @@
 const Furniture = require('../models/Furniture');
 
-async function getAllFurnitures() {
+function getAllFurnitures() {
     return Furniture.find({});
 };
 
-async function createFurniture(data) {
-    return await Furniture.create(data);
+function createFurniture(data) {
+    return Furniture.create(data);
 };
 
-async function getFurnitureById(id) {
+function getFurnitureById(id) {
     return Furniture.findById(id);
+};
+
+function editFurnitureById(id, data) {
+    return Furniture.findByIdAndUpdate(id, data);
+};
+
+function deleteFurnitureById(id) {
+    return Furniture.findByIdAndDelete(id);
 }
 
 module.exports = {
     getAllFurnitures,
     createFurniture,
-    getFurnitureById
+    getFurnitureById,
+    editFurnitureById,
+    deleteFurnitureById
 }

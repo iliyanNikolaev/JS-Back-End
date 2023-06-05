@@ -14,7 +14,7 @@ export async function getFurniture() {
 }
 
 export async function getItemById(id) {
-    return await api.get(host + '/furnitures/details/' + id);
+    return await api.get(host + '/furnitures/' + id);
 }
 
 export async function getMyFurniture() {

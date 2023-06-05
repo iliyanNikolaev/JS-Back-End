@@ -2,7 +2,7 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('../lib/jsonwebtoken');
 
-const SECRET = 's33cr3377';
+const { SECRET } = require('../constants');
 
 async function register(email, password) {
 
