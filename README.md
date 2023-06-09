@@ -1,6 +1,9 @@
 # JS-Back-End
-
+<div id="icons">
 <img width="100" alt="softuniLogo" src="https://user-images.githubusercontent.com/121745595/219448556-2c7c7f5a-c282-411b-9253-1b55fff353d7.png">
+<img width="150" alt="jsLogo" src="https://miro.medium.com/v2/resize:fit:1400/1*f7ztMaMM0etsFHpEfkdiwA.png">
+</div>
+<hr>
 
 
 The course is intensive and aims to introduce students to the development of server-side JavaScript applications on the Node.js platform, using Express.js as the framework. During the training, we will learn how to create a server with Node.js, understand the server-client architecture, and how to create easy and fast data-driven web applications with Node.js, Express.js, and MongoDB, using modern approaches and tools. One of the most popular non-relational databases, MongoDB, will be discussed, along with the Mongoose library for data retrieval from it. Towards the end of the course, a complete REST API will be built from scratch using Express.js and MongoDB. The course emphasizes practical exercises, involving students in real projects to create web pages, implement website fragments, and create comprehensive modern websites with good design, modern structure, and mobile support.
