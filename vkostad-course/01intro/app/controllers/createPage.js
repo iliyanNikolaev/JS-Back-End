@@ -1,5 +1,4 @@
-const { layout } = require('../util');
-const {formidable} = require('formidable');
+const { layout, data } = require('../util');
 
 const createPage = (req, res) => {
     res.write(layout(`
@@ -20,15 +19,32 @@ const createPage = (req, res) => {
 }
 
 const createItem = async (req, res) => {
-    
-    const form = formidable({});
-    let fields;
-    let files;
+    const chunks = [];
+    let queryStr;
 
-    [fields, files] = await form.parse(req);
-    
-    console.log(fields);
-} 
+    req.on('data', (chunk) => {
+        chunks.push(chunk);
+    });
+
+    req.on('end', () => {
+        queryStr = chunks.join('');
+        const itemArr = queryStr.split('&');
+        const nameArr = itemArr[0].split('=');
+        const colorArr = itemArr[1].split('=');
+
+        const item = {
+            id: Date.now(),
+            name: nameArr[1],
+            color: colorArr[1]
+        }
+
+        data.push(item);
+    });
+
+    res.writeHead(301, {
+        'Location': '/catalog'
+    });
+}
 
 module.exports = {
     createPage,
