@@ -1,5 +1,5 @@
-const { subscribe } = require('./eventBus');
+const { emitter } = require('./eventBus');
 
-subscribe('message', (data) => {
+emitter.on('message', (data) => {
     console.log('received data ' + data);
 });

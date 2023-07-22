@@ -1,8 +1,8 @@
-const { subscribe } = require('./eventBus');
+const { emitter } = require('./eventBus');
 
 let sum = 0;
 
-subscribe('message', (data) => {
+emitter.on('message', (data) => {
     sum += data;
 
     console.log('sum is ' + sum);

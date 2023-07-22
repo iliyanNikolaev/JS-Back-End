@@ -1,3 +1,5 @@
+const events = require('events')
+
 const subscribers = {};
 
 const subscribe = (type, callback) => {
@@ -19,7 +21,10 @@ const publish = (type, data) => {
     }
 }
 
+const emitter = new events.EventEmitter();
+
 module.exports = {
     subscribe,
-    publish
+    publish,
+    emitter
 }
