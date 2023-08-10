@@ -1,6 +1,11 @@
 const express = require('express');
+const catalogController = require('./catalogController');
+const createController = require('./createController');
 
 const app = express();
+
+app.use('/catalog', catalogController);
+app.use('/create', createController);
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
@@ -8,22 +13,6 @@ app.get('/', (req, res) => {
 
 app.get('/img', (req, res) => {
     res.sendFile(__dirname + '/Capture.png');
-});
-
-app.route('/create')
- .get((req, res) => {
-    res.send("<form method='post'><input type='text' /><button>Send</button></form>")
-})
-.post((req, res) => {
-    res.send('handling post request!')
-});
-
-app.get('/catalog', (req, res) => {
-    res.send('<h1>Catalog page</h1>')
-});
-
-app.get('/catalog/:itemId', (req, res) => {
-    res.send(`Catalog item ${req.params.itemId}`);
 });
 
 app.get('/data', (req, res) => {
