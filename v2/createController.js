@@ -7,7 +7,7 @@ createController .get('/', (req, res) => {
 })
 
 createController.post('/', (req, res) => {
-    res.send('handling post request!')
+    res.redirect('/catalog')
 });
 
 module.exports = createController;

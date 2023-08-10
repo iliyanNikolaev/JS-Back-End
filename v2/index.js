@@ -1,9 +1,11 @@
 const express = require('express');
 const catalogController = require('./catalogController');
 const createController = require('./createController');
+const logger = require('./logger');
 
 const app = express();
 
+app.use(logger);
 app.use('/catalog', catalogController);
 app.use('/create', createController);
 
