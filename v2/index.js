@@ -5,17 +5,14 @@ const logger = require('./logger');
 
 const app = express();
 
+app.use(express.static('static'));
 app.use(logger);
 app.use('/catalog', catalogController);
 app.use('/create', createController);
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-});
-
-app.get('/img', (req, res) => {
-    res.sendFile(__dirname + '/Capture.png');
-});
+// app.get('/', (req, res) => {
+//     res.sendFile(__dirname + '/index.html');
+// });
 
 app.get('/data', (req, res) => {
     res.json([
