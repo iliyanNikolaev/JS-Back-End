@@ -1,0 +1,32 @@
+[
+    {
+        "id": "1231",
+        "name": "Asus TUF Gaming A15",
+        "price": 1200
+    },
+    {
+        "id": "2321",
+        "name": "Acer Nitro 5",
+        "price": 1300
+    },
+    {
+        "id": "3312",
+        "name": "Lenovo IdeaPad Gaming 3",
+        "price": 1250
+    },
+    {
+        "name": "Dell Latititude E5270",
+        "price": "219",
+        "id": "1625"
+    },
+    {
+        "name": "HP G3",
+        "price": "50",
+        "id": "4182"
+    },
+    {
+        "name": "Lenovo Legion",
+        "price": "1000",
+        "id": "6138"
+    }
+]
