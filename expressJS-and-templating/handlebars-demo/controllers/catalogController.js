@@ -1,4 +1,4 @@
-const { getAll, getById } = require('../services/productService');
+const { getAll, getById, checkId } = require('../services/productService');
 
 const catalogController = require('express').Router();
 
@@ -13,8 +13,8 @@ catalogController.get('/', (req, res) => {
 catalogController.get('/:productId', (req, res) => {
     const productId = req.params.productId;
     const currentProduct = getById(productId);
-
-    if (currentProduct != undefined) {
+    
+    if (checkId(productId)) {
         res.render('details', {
             product: currentProduct
         });

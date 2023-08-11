@@ -4,7 +4,7 @@ const newId = () => {
     return (Math.random()*100000).toString().slice(-4);
 }
 
-const data = JSON.parse(fs.readFileSync('./services/data.json'));
+let data = JSON.parse(fs.readFileSync('./services/data.json'));
 
 function getAll() {
     return data;
@@ -25,17 +25,26 @@ function createItem(item) {
 }
 
 function editItemById(id, newItem) {
-    data.map(x => x.id == id ? {id: x.id, ...newItem} : {...x});
+    data = data.map(x => x.id == id ? {id: x.id, ...newItem} : {...x});
 }
 
 function deleteById(id) {
-    data.filter(x => x.id != id);
+    data = data.filter(x => x.id != id);
+    
+    fs.writeFile('./services/data.json', JSON.stringify(data), () => {
+        console.log(`deleted item with id ${id}`);
+    });
 }
 
+function checkId(id) {
+    return data.some(x => x.id == id);
+}
+ 
 module.exports = {
     getAll,
     getById,
     createItem,
     editItemById,
-    deleteById
+    deleteById,
+    checkId
 }

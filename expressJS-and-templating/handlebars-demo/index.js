@@ -3,6 +3,7 @@ const hbs = require('express-handlebars');
 const homeController = require('./controllers/homeController');
 const catalogController = require('./controllers/catalogController');
 const createController = require('./controllers/createController');
+const deleteController = require('./controllers/deleteController');
 
 const handlebars = hbs.create({
     extname: '.hbs'
@@ -21,5 +22,6 @@ app.use(express.urlencoded({
 app.use(homeController);
 app.use('/catalog', catalogController);
 app.use('/create', createController);
+app.use('/delete', deleteController);
 
 app.listen(6161, () => console.log('server is listenning on port 6161...'))
