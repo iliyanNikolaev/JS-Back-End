@@ -1,0 +1,18 @@
+<h1>{{message}}</h1>
+
+{{#if username}}
+<p>Welcome, {{username}}</p>
+{{/if}}
+
+<h2>Products</h2>
+
+{{#if products}}
+<ul>
+    {{#each products}}
+        {{>userCard}}
+    {{/each}}
+</ul>
+
+{{else}}
+        <p>No products yet</p>
+{{/if}}
