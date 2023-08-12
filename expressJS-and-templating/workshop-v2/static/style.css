@@ -1,3 +1,30 @@
 body{
     background-color: grey;
 }
+
+.root {
+    text-align: center;
+    margin: auto;
+    width: 980px;
+    background-color: white;
+}
+
+.root nav ul {
+    list-style: none;
+}
+
+.root nav ul li {
+    display: inline;
+}
+
+.root nav ul li a {
+    text-decoration: none;
+    background-color: blueviolet;
+    color: white;
+    padding: 6px;
+    border-radius: 6px;
+}
+
+.root nav ul li a:hover{
+    background-color: blue;
+}
