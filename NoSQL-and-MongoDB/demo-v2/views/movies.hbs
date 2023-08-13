@@ -1,9 +1,9 @@
 <h1>Movies</h1>
 
 {{#if movies}}
-<ul>
+<ul class="movies-list">
     {{#each movies}}
-        <li>{{title}}</li>
+        {{>movieCard}}
     {{/each}}
 </ul>
 {{else}}

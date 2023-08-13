@@ -9,7 +9,12 @@ async function createNewMovie(movieData) {
     return Movie.create(movieData);
 }
 
+async function getMovieById(movieId) {
+    return Movie.findById(movieId).lean();
+}
+
 module.exports = {
     getAllMovies,
-    createNewMovie
+    createNewMovie,
+    getMovieById
 }
