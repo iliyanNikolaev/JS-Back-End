@@ -1,6 +1,7 @@
 const express = require('express');
 const hbs = require('express-handlebars');
 const mongoose = require('mongoose');
+const { MONGO_CONECTIONSTR } = require('./constants');
 
 const homeController = require('./controllers/homeController');
 const movieController = require('./controllers/movieController');
@@ -25,8 +26,11 @@ async function start() {
 
     app.use(homeController);
     app.use('/movies', movieController);
+    app.all('*', (req, res) => {
+        res.render('404');
+    });
 
-    await mongoose.connect('mongodb://127.0.0.1:27017/testdb');
+    await mongoose.connect(MONGO_CONECTIONSTR);
 
     console.log('DB connected.');
 
