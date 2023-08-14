@@ -7,6 +7,7 @@ async function dbConfig() {
         console.log('DB connected.')
     } catch (error) {
         console.log('>>> DB NOT CONNECTED!! <<<');
+        process.exit(1); // app will stop.
     }
 }
 

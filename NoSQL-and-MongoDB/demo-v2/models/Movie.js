@@ -5,6 +5,7 @@ const movieSchema = new Schema({
     title: String,
     description: String,
     imgURL: String,
+    categories: { type: [Types.ObjectId], default: [], ref: 'Category'}, 
     comments: { type: [Types.ObjectId], default: [], ref: 'Comment'}
 });
 
