@@ -12,6 +12,6 @@ async function start() {
     await connectToDB();
     expressConfig(app);
     routesConfig(app);
-    
-    app.listen(3001, () => console.log('Server listening on port 6161'));
+
+    app.listen(3001, () => console.log('Server listening on port 3001'));
 }
