@@ -51,7 +51,7 @@
     questions: {
         buyer: [Types.ObjectId] ref: ["Users"],
         seller: [Types.ObjectId] ref: ["Users"],
-        aproved: boolean,
+        approved: boolean,
         phone: String
         address: String
     }
