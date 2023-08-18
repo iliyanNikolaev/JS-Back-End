@@ -1,11 +1,13 @@
 const { Schema, model, Types } = require('mongoose');
 
 const laptopSchema = new Schema({
-    brand: { type: [Types.ObjectId], default: [], ref: "Brand" },
-    cpu: { type: [Types.ObjectId], default: [], ref: "Processor" },
-    gpu: { type: [Types.ObjectId], default: [], ref: "VideoCard" },
+    brand: String,
+    cpu: String,
+    gpu: String,
     ssd: String,
-    price: Number
+    ram: String,
+    price: Number,
+    owner: { type: Types.ObjectId, ref: "User" }
 });
 
 const Laptop = model('Laptop', laptopSchema);
