@@ -9,6 +9,7 @@ function validateToken(req, res, next) {
             const data = jwt.verify(token, JWT_SECRET);
             
             req.userData = data;
+            
             res.locals.userData = data;
 
         } catch (err) {
