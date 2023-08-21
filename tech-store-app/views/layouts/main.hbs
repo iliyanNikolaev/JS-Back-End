@@ -13,12 +13,21 @@
             <ul>
                 <li><a href="/">HOME</a></li>
                 <li><a href="/catalog">CATALOG</a></li>
+                {{#if userData}}
+                <li><a href="/create">SELL PRODUCT</a></li>
+                {{else}}
                 <li><a href="/auth/register">REGISTER</a></li>
                 <li><a href="/auth/login">LOGIN</a></li>
+                {{/if}}
             </ul>
         </nav>
+        {{#if userData}}
+        <p>Logged with: {{userData.email}}</p>
+        {{else}}
+        <p>Not logged.</p>
+        {{/if}}
     </header>
-    
+
     {{{body}}}
 </body>
 

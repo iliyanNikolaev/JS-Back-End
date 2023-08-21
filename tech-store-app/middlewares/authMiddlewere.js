@@ -9,10 +9,11 @@ function validateToken(req, res, next) {
             const data = jwt.verify(token, JWT_SECRET);
             
             req.userData = data;
+            res.locals.userData = data;
 
         } catch (err) {
 
-            res.cookie('token', '', { maxAge: 0 }); // delete cookie
+            res.clearCookie('userData');
 
             return res.redirect('/auth/login');
         }

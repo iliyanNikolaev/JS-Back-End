@@ -12,11 +12,8 @@ authController.post('/login', async (req, res) => {
     if(email != '' && password != '') {
         try {
             const token = await login(email, password)
-
             res.cookie('token', token);
-    
-            res.render('home');
-
+            res.redirect('/');
         } catch (err) {
             res.send(err.message);
         }
@@ -37,8 +34,9 @@ authController.post('/register', async (req, res) => {
 
         try {
             await register(email, password);
-
-            res.redirect('/auth/login');
+            const token = await login(email, password);
+            res.cookie('token', token);
+            res.redirect('/');
         } catch (err) {
             res.send(err.message);
         }

@@ -7,6 +7,7 @@ const laptopSchema = new Schema({
     ssd: String,
     ram: String,
     price: Number,
+    imgURL: String,
     owner: { type: Types.ObjectId, ref: "User" }
 });
 

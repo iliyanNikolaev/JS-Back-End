@@ -1,7 +1,11 @@
 const homeController = require('express').Router();
 
 homeController.get('/', (req, res) => {
-    res.render('home');
+    const userData = req.userData;
+
+    res.render('home', {
+        userData
+    });
 });
 
 module.exports = homeController;

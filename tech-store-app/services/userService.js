@@ -31,13 +31,19 @@ async function login(email, password) {
 }
 
 async function register(email, password) {
-    
-    const hashedPass = await bcrypt.hash(password, 10);
 
-    const user = await User.create({
-        email,
-        password: hashedPass
-    });
+    const isExist = await User.findOne({ email });
+    
+    if(isExist != {}) {
+        const hashedPass = await bcrypt.hash(password, 10);
+
+        await User.create({
+            email,
+            password: hashedPass
+        });
+    } else {
+        throw new Error('This email already exist!!');
+    }
 }
 
 module.exports = {
