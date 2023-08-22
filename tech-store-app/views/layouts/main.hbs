@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
@@ -15,6 +16,7 @@
                 <li><a href="/catalog">CATALOG</a></li>
                 {{#if userData}}
                 <li><a href="/create">SELL PRODUCT</a></li>
+                <li><a href="/auth/logout">LOGOUT</a></li>
                 {{else}}
                 <li><a href="/auth/register">REGISTER</a></li>
                 <li><a href="/auth/login">LOGIN</a></li>

@@ -45,5 +45,11 @@ authController.post('/register', async (req, res) => {
     }
 });
 
+authController.get('/logout', (req, res) => {
+    res.clearCookie('token');
+
+    res.redirect('/');
+});
+
 
 module.exports = authController;
