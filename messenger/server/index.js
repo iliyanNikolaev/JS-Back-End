@@ -1,8 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-const { SECRET_KEY } = require('./constants');
-
 const conversationsRouter = require('./routes/conversations');
 const messagesRouter = require('./routes/messages');
 const usersRouter = require('./routes/users');
@@ -29,19 +27,10 @@ async function start() {
     app.use((req, res, next) => {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Methods', 'HEAD, OPTIONS, GET, POST, PUT, DELETE');
-        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Secret-Key');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
         next();
     });
-
-    //security middleware
-    app.use((req, res, next) => {
-        if(!req.headers['secret-key'] || req.headers['secret-key'] != SECRET_KEY){
-            res.status(400).json({ error: 'Acess Denied!!!'});
-        }
-
-        next();
-    })
 
     //--ROUTES--//
     app.use('/api/conversations', conversationsRouter);

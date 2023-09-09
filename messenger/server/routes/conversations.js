@@ -2,6 +2,7 @@ const Conversation = require('../models/Conversation');
 
 const conversationsRouter = require('express').Router();
 
+//create conversation
 conversationsRouter.post('/', async (req, res) => {
     try {
         const conversation = await Conversation.create({
@@ -14,9 +15,10 @@ conversationsRouter.post('/', async (req, res) => {
     }
 });
 
-conversationsRouter.get('/:username', async (req, res) => {
+// get all conversations for current user id
+conversationsRouter.get('/:userId', async (req, res) => {
     try {
-        const conversations = await Conversation.find({ members: { $in: [req.params.username] } });
+        const conversations = await Conversation.find({ members: { $in: [req.params.id] } });
 
         res.status(200).json(conversations);
     } catch (err) {
