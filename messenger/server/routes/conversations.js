@@ -18,7 +18,7 @@ conversationsRouter.post('/', async (req, res) => {
 // get all conversations for current user id
 conversationsRouter.get('/:userId', async (req, res) => {
     try {
-        const conversations = await Conversation.find({ members: { $in: [req.params.id] } });
+        const conversations = await Conversation.find({ members: { $in: [req.params.userId] } });
 
         res.status(200).json(conversations);
     } catch (err) {

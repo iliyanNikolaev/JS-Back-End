@@ -33,6 +33,7 @@ usersRouter.get('/', async (req, res) => {
     }
 });
 
+// get an user
 usersRouter.get('/:id', async (req, res) => {
     const { id } = req.params;
 

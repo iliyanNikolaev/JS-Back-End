@@ -8,14 +8,15 @@ import Conversations from './conversations/Conversations';
 
 export default function Chat() {
     const navigate = useNavigate();
-    const { authData } = useContext(UserContext);
-    if(!authData.username) {
-        return navigate('/');
-    }
 
+    const { authData } = useContext(UserContext);
     const [allUsers, setAllUsers] = useState(null);
 
     useEffect(() => {
+        if (!authData.username) {
+            return navigate('/');
+        }
+
         fetch('http://localhost:3030/api/users')
             .then(res => res.json())
             .then(data => setAllUsers(data))
@@ -24,10 +25,10 @@ export default function Chat() {
 
     return (
         <div className="chat-container">
-            <div className="conversations"><Conversations/></div>
+            <div className="conversations"><Conversations /></div>
             <div className="chat-content">chat-content</div>
             <div className="all-users">
-                { <AllUsers allUsers={allUsers} />}
+                {<AllUsers allUsers={allUsers} />}
             </div>
         </div>
     )
