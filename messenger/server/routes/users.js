@@ -33,4 +33,16 @@ usersRouter.get('/', async (req, res) => {
     }
 });
 
+usersRouter.get('/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const user = await User.findById(id);
+
+        res.status(200).json(user);
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+});
+
 module.exports = usersRouter;
