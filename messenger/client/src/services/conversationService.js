@@ -7,7 +7,7 @@ const endpoints = {
 
 export async function getAllConversationsByUserId(userId) {
     try {
-        const response = await fetch(host + endpoints.byId);
+        const response = await fetch(host + endpoints.byId + userId);
         const data = await response.json();
 
         return data;

@@ -1,5 +1,6 @@
 .messenger-container{
     display: flex;
+    gap: 12px;
 }
 
 .conversations{
@@ -12,4 +13,13 @@
 
 .all-users{
     flex: 3;
+}
+
+.conversations,
+.chat,
+.all-users{
+    height: 93vh;
+    border: 1px solid;
+    border-radius: 12px;
+    padding: 12px;
 }
