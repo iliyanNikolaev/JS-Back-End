@@ -1,0 +1,15 @@
+.messenger-container{
+    display: flex;
+}
+
+.conversations{
+    flex: 3;
+}
+
+.chat{
+    flex: 6;
+}
+
+.all-users{
+    flex: 3;
+}

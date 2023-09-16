@@ -15,7 +15,7 @@ export default function Login() {
   async function loginHandler() {
     try {
       await login(username);
-      navigate('/chat');
+      navigate('/messenger');
     } catch (err) {
       alert(err.message);
     }
