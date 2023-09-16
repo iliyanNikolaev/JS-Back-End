@@ -3,7 +3,9 @@ import { UserContext } from '../../../../context/userContext'
 
 import ConversationItem from './conversation-item/ConversationItem';
 
-export default function Conversations() {
+export default function Conversations({
+    startConversation
+}) {
 
     const { authData } = useContext(UserContext);
 
@@ -16,12 +18,13 @@ export default function Conversations() {
                 setConversations(data);
             })
             .catch(err => alert(err.message));
-    }, [])
+    }, []);
+
     return (
         <>
             <h2>Your Conversations</h2>
             {conversations
-                ? <> {conversations.map(x => <ConversationItem key={x._id} conversation={x} />)} </>
+                ? <> {conversations.map(x => <ConversationItem key={x._id} conversation={x} startConversation={startConversation}/>)} </>
                 : <p>Loading...</p>}
         </>
     )

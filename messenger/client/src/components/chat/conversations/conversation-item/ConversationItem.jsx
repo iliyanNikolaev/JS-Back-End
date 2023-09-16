@@ -3,11 +3,18 @@ import { UserContext } from "../../../../../context/userContext";
 import { Link } from "react-router-dom";
 
 export default function ConversationItem({
-    conversation
+    conversation,
+    startConversation
 }) {
     const { authData } = useContext(UserContext);
 
     const [participant, setParticipant] = useState(null);
+
+    function startConversationHandler(e) {
+        e.preventDefault();
+
+        startConversation(conversation._id);
+    }
     
     useEffect(() => {
         const participantId = conversation.members.find(x => x != authData._id);
@@ -21,7 +28,7 @@ export default function ConversationItem({
     return (
         <>
             { participant 
-            ?<> <Link>{participant.username}</Link></>
+            ?<> <Link onClick={startConversationHandler}>{participant.username}</Link></>
             : <p>Loading...</p>}
         </>
     )

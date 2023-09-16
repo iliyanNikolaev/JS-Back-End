@@ -1,7 +1,11 @@
 import React from 'react'
 
-export default function CurrentConversation() {
+export default function CurrentConversation({
+    chat
+}) {
   return (
-    <div>CurrentConversation</div>
-  )
+    <>
+    {chat ? <>messages here</> : <>pick a user for start conversation</>}
+    </>
+    )
 }
